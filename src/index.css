@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #D4A017;
+  --color-darkgold: #B8860B;
+  --color-lightgold: #F0C040;
+  --color-cream: #FFF8E7;
+  --color-warmwhite: #FDFAF4;
+  --color-chocolate: #1C0F00;
+  --color-richbrown: #2E1A00;
+  --color-softbrown: #4A2E00;
+  --font-royal: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FDFAF4;
+  color: #1C0F00;
+  font-family: 'Lato', sans-serif;
+}
