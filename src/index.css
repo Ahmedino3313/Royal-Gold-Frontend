@@ -26,3 +26,31 @@ body {
   color: #1C0F00;
   font-family: 'Lato', sans-serif;
 }
+
+/* Admin Dashboard Responsive */
+@media (min-width: 768px) {
+  .admin-sidebar-desktop {
+    display: block !important;
+  }
+  .admin-sidebar-mobile {
+    display: none !important;
+  }
+  .admin-main {
+    margin-left: 260px !important;
+  }
+  .admin-menu-btn {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-sidebar-desktop {
+    display: none !important;
+  }
+  .admin-main {
+    margin-left: 0 !important;
+  }
+  .admin-menu-btn {
+    display: flex !important;
+  }
+}

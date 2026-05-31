@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HiOutlineMail, HiOutlineLockClosed, HiOutlineUser, HiEye, HiEyeOff } from 'react-icons/hi'
 import { GiCakeSlice } from 'react-icons/gi'
 import { register } from '../store/slices/authSlice.js'
+import toast from 'react-hot-toast'
 
 function Register() {
     const navigate = useNavigate()
@@ -21,13 +22,22 @@ function Register() {
     }
 
     const handleSubmit = async () => {
-        if (!form.name || !form.email || !form.password) return
-        if (form.password.length < 6) return
-        const result = await dispatch(register(form))
-        if (register.fulfilled.match(result)) {
-        navigate('/')
-        }
+    if (!form.name || !form.email || !form.password) {
+        toast.error('All fields are required')
+        return
     }
+
+    if (form.password.length < 6) {
+        toast.error('Password must be at least 6 characters')
+        return
+    }
+
+    const result = await dispatch(register(form))
+
+    if (register.fulfilled.match(result)) {
+        navigate('/')
+    }
+}
 
     return (
         <section style={{

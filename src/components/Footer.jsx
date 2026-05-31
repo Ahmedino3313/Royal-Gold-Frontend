@@ -124,7 +124,7 @@ function Footer() {
                         </h4>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                            {['Celebration Cakes', 'Wedding Cakes', 'Cupcakes', 'Cuisines', 'Small Chops'].map(cat => (
+                            {['Celebration Cakes', 'Wedding Cakes', 'Cupcakes', 'Cuisines', 'Small Chops', 'Drinks'].map(cat => (
                                 <Link
                                 key={cat}
                                 to="/shop"

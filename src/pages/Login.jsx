@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { HiOutlineMail, HiOutlineLockClosed, HiEye, HiEyeOff } from 'react-icons/hi'
 import { GiCakeSlice } from 'react-icons/gi'
 import { login } from '../store/slices/authSlice.js'
+import toast from 'react-hot-toast'
+
 
 function Login() {
     const navigate = useNavigate()
@@ -21,10 +23,20 @@ function Login() {
     }
 
     const handleSubmit = async () => {
-        if (!form.email || !form.password) return
+        if (!form.email || !form.password) {
+            toast.error('Email and password are required')
+            return
+        }
+
+        if (form.password.length < 6) {
+            toast.error('Password must be at least 6 characters')
+            return
+        }
+
         const result = await dispatch(login(form))
+
         if (login.fulfilled.match(result)) {
-        navigate('/')
+            navigate('/')
         }
     }
 

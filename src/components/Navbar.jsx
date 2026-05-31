@@ -11,6 +11,8 @@ function Navbar() {
     const cartItems = useSelector(state => state.cart.items)
     const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0)
 
+    const { user } = useSelector(state => state.auth)
+
     useEffect(() => {
         const handleScroll = () => {
         setScrolled(window.scrollY > 50)
@@ -134,7 +136,7 @@ function Navbar() {
                         </Link>
 
                         {/* User - both mobile and desktop */}
-                        <Link to="/login" style={{ color: navColor }} title="Login">
+                        <Link to={user ? '/account' : '/login'} style={{ color: navColor }} title="Login">
                             <HiOutlineUser style={{ fontSize: '1.4rem' }} />
                         </Link>
 
