@@ -47,10 +47,10 @@ function useImageUpload() {
                 return null
             }
         } catch (err) {
-        toast.error('Image upload failed')
+            toast.error('Image upload failed')
         return null
         } finally {
-        setUploading(false)
+            setUploading(false)
         }
     }
 

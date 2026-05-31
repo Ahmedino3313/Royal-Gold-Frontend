@@ -201,8 +201,8 @@ function ManageOrders() {
 
                                 <span style={{
                                     backgroundColor: order.payment_status === 'paid'
-                                        ? 'rgba(22,163,74,0.1)'
-                                        : 'rgba(217,119,6,0.1)',
+                                        ? 'rgba(22, 163, 74, 0.1)'
+                                        : 'rgba(217, 119, 6, 0.1)',
                                     color: order.payment_status === 'paid' ? '#16a34a' : '#d97706',
                                     fontFamily: 'Lato, sans-serif',
                                     fontSize: '0.72rem',
