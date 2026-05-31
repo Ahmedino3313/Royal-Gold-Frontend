@@ -105,8 +105,9 @@ function Dashboard() {
 
       {/* User + Logout */}
       <div style={{
-        borderTop: '1px solid rgba(212,160,23,0.15)',
-        paddingTop: '1.2rem',
+        borderTop: '1px solid rgba(212, 160, 23, 0.15)',
+        paddingTop: '0.8rem',
+        marginTop: '2rem',
       }}>
         <p style={{
           fontFamily: 'Lato, sans-serif',
@@ -165,7 +166,7 @@ function Dashboard() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
             zIndex: 998,
           }}
         />

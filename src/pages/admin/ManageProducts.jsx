@@ -214,17 +214,16 @@ function ManageProducts() {
                         </button>
                     </div>
                 ) : (
-
-                /* Products Table */
                 <div style={{
                     backgroundColor: '#fff8e7',
                     borderRadius: '20px',
                     border: '1px solid rgba(212,160,23,0.15)',
                     overflow: 'hidden',
                 }}>
-
-                    {/* Table Header */}
-                    <div style={{
+                    {/* Desktop Table Header — hidden on mobile */}
+                    <div
+                    className="admin-table-header"
+                    style={{
                         display: 'grid',
                         gridTemplateColumns: '60px 1fr 120px 100px 80px 100px',
                         gap: '1rem',
@@ -243,149 +242,279 @@ function ManageProducts() {
                         <span>Price</span>
                         <span>Stock</span>
                         <span>Actions</span>
-                    </div>
+                        </div>
 
-                    {/* Table Rows */}
-                    {products.map((product, i) => (
-                        <motion.div
-                            key={product.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: i * 0.05 }}
-                            style={{
-                                display: 'grid',
-                                gridTemplateColumns: '60px 1fr 120px 100px 80px 100px',
-                                gap: '1rem',
-                                padding: '1rem 1.5rem',
-                                alignItems: 'center',
-                                borderBottom: i < products.length - 1
-                                ? '1px solid rgba(212,160,23,0.1)'
-                                : 'none',
-                                transition: 'background 0.2s ease',
-                            }}
-                            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.04)'}
-                            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-                        >
-                            {/* Image */}
-                            <img
-                                src={product.image_url || 'https://placehold.co/60x60/fff8e7/d4a017?text=No+Img'}
-                                alt={product.name}
+                        {products.map((product, i) => (
+                            <motion.div
+                                key={product.id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3, delay: i * 0.05 }}
                                 style={{
-                                width: '50px',
-                                height: '50px',
-                                borderRadius: '10px',
-                                objectFit: 'cover',
+                                borderBottom: i < products.length - 1
+                                    ? '1px solid rgba(212,160,23,0.1)'
+                                    : 'none',
                                 }}
-                            />
-
-                            {/* Name + Description */}
-                            <div>
-                                <p style={{
+                            >
+                                {/* Desktop Row */}
+                                <div
+                                    className="admin-table-row"
+                                    style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: '60px 1fr 120px 100px 80px 100px',
+                                        gap: '1rem',
+                                        padding: '1rem 1.5rem',
+                                        alignItems: 'center',
+                                        transition: 'background 0.2s ease',
+                                    }}
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.04)'}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                                    >
+                                    <img
+                                        src={product.image_url || 'https://placehold.co/60x60/fff8e7/d4a017?text=No+Img'}
+                                        alt={product.name}
+                                        style={{
+                                            width: '50px',
+                                            height: '50px',
+                                            borderRadius: '10px',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
+                                <div>
+                                    <p style={{
                                     fontFamily: 'Lato, sans-serif',
                                     fontWeight: '700',
                                     color: '#1c0f00',
                                     fontSize: '0.9rem',
                                     margin: '0 0 0.2rem',
-                                }}>
-                                    {product.name}
-                                </p>
+                                    }}>
+                                        {product.name}
+                                    </p>
 
-                                <p style={{
+                                    <p style={{
+                                        fontFamily: 'Lato, sans-serif',
+                                        fontSize: '0.78rem',
+                                        color: '#4a2e00',
+                                        margin: 0,
+                                        opacity: 0.6,
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                        textOverflow: 'ellipsis',
+                                        maxWidth: '200px',
+                                    }}>
+                                        {product.description}
+                                    </p>
+                                </div>
+
+                                <span style={{
+                                    backgroundColor: 'rgba(212,160,23,0.1)',
+                                    color: '#b8860b',
                                     fontFamily: 'Lato, sans-serif',
-                                    fontSize: '0.78rem',
-                                    color: '#4a2e00',
-                                    margin: 0,
-                                    opacity: 0.6,
-                                    overflow: 'hidden',
-                                    whiteSpace: 'nowrap',
-                                    textOverflow: 'ellipsis',
-                                    maxWidth: '200px',
+                                    fontSize: '0.75rem',
+                                    fontWeight: '700',
+                                    padding: '0.25rem 0.7rem',
+                                    borderRadius: '100px',
+                                    width: 'fit-content',
                                 }}>
-                                    {product.description}
-                                </p>
+                                    {product.category}
+                                </span>
+
+                                <span style={{
+                                    fontFamily: 'Playfair Display, serif',
+                                    fontWeight: '800',
+                                    color: '#d4a017',
+                                    fontSize: '0.95rem',
+                                }}>
+                                    &#8358;{Number(product.price).toLocaleString()}
+                                </span>
+
+                                <span style={{
+                                    fontFamily: 'Lato, sans-serif',
+                                    fontWeight: '700',
+                                    fontSize: '0.88rem',
+                                    color: product.stock > 5 ? '#16a34a' : product.stock > 0 ? '#d97706' : '#dc2626',
+                                }}>
+                                    {product.stock}
+                                </span>
+
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <button
+                                        onClick={() => openEditModal(product)}
+                                        style={{
+                                            width: '34px',
+                                            height: '34px',
+                                            borderRadius: '8px',
+                                            border: '1px solid rgba(212,160,23,0.3)',
+                                            backgroundColor: 'rgba(212,160,23,0.08)',
+                                            color: '#d4a017',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '0.9rem',
+                                            transition: 'all 0.2s ease',
+                                        }}
+                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.2)'}
+                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.08)'}
+                                    >
+                                        <HiOutlinePencil />
+                                    </button>
+
+                                    <button
+                                        onClick={() => handleDelete(product)}
+                                        style={{
+                                            width: '34px',
+                                            height: '34px',
+                                            borderRadius: '8px',
+                                            border: '1px solid rgba(220,38,38,0.3)',
+                                            backgroundColor: 'rgba(220,38,38,0.08)',
+                                            color: '#dc2626',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '0.9rem',
+                                            transition: 'all 0.2s ease',
+                                        }}
+                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(220,38,38,0.2)'}
+                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(220,38,38,0.08)'}
+                                    >
+                                        <HiOutlineTrash />
+                                    </button>
+                                </div>
                             </div>
 
-                            {/* Category */}
-                            <span style={{
-                                backgroundColor: 'rgba(212,160,23,0.1)',
-                                color: '#b8860b',
-                                fontFamily: 'Lato, sans-serif',
-                                fontSize: '0.75rem',
-                                fontWeight: '700',
-                                padding: '0.25rem 0.7rem',
-                                borderRadius: '100px',
-                                width: 'fit-content',
-                            }}>
-                                {product.category}
-                            </span>
+                            {/* Mobile Card — shown only on mobile */}
+                            <div
+                                className="admin-mobile-card"
+                                style={{
+                                    display: 'none',
+                                    padding: '1rem',
+                                    gap: '1rem',
+                                }}
+                            >
+                                {/* Top row — image + name + actions */}
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.8rem',
+                                    marginBottom: '0.8rem',
+                                }}>
+                                    <img
+                                        src={product.image_url || 'https://placehold.co/60x60/fff8e7/d4a017?text=No+Img'}
+                                        alt={product.name}
+                                        style={{
+                                            width: '55px',
+                                            height: '55px',
+                                            borderRadius: '10px',
+                                            objectFit: 'cover',
+                                            flexShrink: 0,
+                                        }}
+                                    />
 
-                            {/* Price */}
-                            <span style={{
-                                fontFamily: 'Playfair Display, serif',
-                                fontWeight: '800',
-                                color: '#d4a017',
-                                fontSize: '0.95rem',
-                            }}>
-                                &#8358;{Number(product.price).toLocaleString()}
-                            </span>
+                                    <div style={{ flex: 1 }}>
+                                        <p style={{
+                                            fontFamily: 'Lato, sans-serif',
+                                            fontWeight: '700',
+                                            color: '#1c0f00',
+                                            fontSize: '0.95rem',
+                                            margin: '0 0 0.2rem',
+                                        }}>
+                                            {product.name}
+                                        </p>
 
-                            {/* Stock */}
-                            <span style={{
-                                fontFamily: 'Lato, sans-serif',
-                                fontWeight: '700',
-                                fontSize: '0.88rem',
-                                color: product.stock > 5 ? '#16a34a' : product.stock > 0 ? '#d97706' : '#dc2626',
-                            }}>
-                                {product.stock}
-                            </span>
+                                        <p style={{
+                                            fontFamily: 'Lato, sans-serif',
+                                            fontSize: '0.78rem',
+                                            color: '#4a2e00',
+                                            margin: 0,
+                                            opacity: 0.6,
+                                        }}>
+                                            {product.description?.substring(0, 40)}...
+                                        </p>
+                                    </div>
 
-                            {/* Actions */}
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <button
-                                    onClick={() => openEditModal(product)}
-                                    style={{
-                                        width: '34px',
-                                        height: '34px',
-                                        borderRadius: '8px',
-                                        border: '1px solid rgba(212,160,23,0.3)',
-                                        backgroundColor: 'rgba(212,160,23,0.08)',
+                                    {/* Action buttons */}
+                                    <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                                        <button
+                                            onClick={() => openEditModal(product)}
+                                            style={{
+                                            width: '36px',
+                                            height: '36px',
+                                            borderRadius: '8px',
+                                            border: '1px solid rgba(212,160,23,0.3)',
+                                            backgroundColor: 'rgba(212,160,23,0.08)',
+                                            color: '#d4a017',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '1rem',
+                                            }}
+                                        >
+                                            <HiOutlinePencil />
+                                        </button>
+
+                                        <button
+                                            onClick={() => handleDelete(product)}
+                                            style={{
+                                            width: '36px',
+                                            height: '36px',
+                                            borderRadius: '8px',
+                                            border: '1px solid rgba(220,38,38,0.3)',
+                                            backgroundColor: 'rgba(220,38,38,0.08)',
+                                            color: '#dc2626',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            fontSize: '1rem',
+                                            }}
+                                        >
+                                            <HiOutlineTrash />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Bottom row — category + price + stock */}
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.8rem',
+                                    flexWrap: 'wrap',
+                                }}>
+                                    <span style={{
+                                        backgroundColor: 'rgba(212,160,23,0.1)',
+                                        color: '#b8860b',
+                                        fontFamily: 'Lato, sans-serif',
+                                        fontSize: '0.75rem',
+                                        fontWeight: '700',
+                                        padding: '0.25rem 0.7rem',
+                                        borderRadius: '100px',
+                                    }}>
+                                        {product.category}
+                                    </span>
+
+                                    <span style={{
+                                        fontFamily: 'Playfair Display, serif',
+                                        fontWeight: '800',
                                         color: '#d4a017',
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '0.9rem',
-                                        transition: 'all 0.2s ease',
-                                    }}
-                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.2)'}
-                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(212,160,23,0.08)'}
-                                >
-                                    <HiOutlinePencil />
-                                </button>
+                                        fontSize: '0.95rem',
+                                    }}>
+                                        &#8358;{Number(product.price).toLocaleString()}
+                                    </span>
 
-                                <button
-                                    onClick={() => handleDelete(product)}
-                                    style={{
-                                        width: '34px',
-                                        height: '34px',
-                                        borderRadius: '8px',
-                                        border: '1px solid rgba(220,38,38,0.3)',
-                                        backgroundColor: 'rgba(220,38,38,0.08)',
-                                        color: '#dc2626',
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '0.9rem',
-                                        transition: 'all 0.2s ease',
-                                    }}
-                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'rgba(220,38,38,0.2)'}
-                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'rgba(220,38,38,0.08)'}
-                                >
-                                    <HiOutlineTrash />
-                                </button>
+                                    <span style={{
+                                        fontFamily: 'Lato, sans-serif',
+                                        fontWeight: '700',
+                                        fontSize: '0.82rem',
+                                        color: product.stock > 5 ? '#16a34a' : product.stock > 0 ? '#d97706' : '#dc2626',
+                                    }}>
+                                        Stock: {product.stock}
+                                    </span>
+                                </div>
                             </div>
-                        </motion.div>
+                    </motion.div>
                     ))}
                 </div>
             )}

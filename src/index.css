@@ -54,3 +54,16 @@ body {
     display: flex !important;
   }
 }
+
+/* Admin table responsive */
+@media (max-width: 767px) {
+  .admin-table-header {
+    display: none !important;
+  }
+  .admin-table-row {
+    display: none !important;
+  }
+  .admin-mobile-card {
+    display: block !important;
+  }
+}
